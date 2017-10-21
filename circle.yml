@@ -20,6 +20,7 @@ deployment:
   development:
     branch: master
     commands:
+      - ls
       - npm run build
       - cd ./build
       - now -t ${NOW_CLI_TOKEN} -e REACT_APP_ENV=${ENVIRONMENT}
