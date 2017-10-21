@@ -1,6 +1,6 @@
 machine:
   environment:
-    PATH: "${PATH}:${HOME}/intouch-api/node_modules/.bin"
+    PATH: "${PATH}:${HOME}/intouch-mobile-client/node_modules/.bin"
   node:
     version: 8.1.0
 
