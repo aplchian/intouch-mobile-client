@@ -10,7 +10,7 @@ dependencies:
   cache_directories:
     - ~/.cache/yarn
   pre:
-    - yarn global add now
+    - yarn global add now now-serve
 
 test:
   override:
@@ -22,7 +22,6 @@ deployment:
     commands:
       - ls
       - npm run build
-      - cd ./build
-      - now . -t ${NOW_CLI_TOKEN} -e REACT_APP_ENV=${ENVIRONMENT} --static
+      - ns build -t ${NOW_CLI_TOKEN} -e REACT_APP_ENV=${ENVIRONMENT}
       - now -t ${NOW_CLI_TOKEN} alias slo
   
