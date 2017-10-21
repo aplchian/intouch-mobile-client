@@ -21,6 +21,7 @@ deployment:
     branch: master
     commands:
       - npm run build
+      - pwd
       - cd ../../build
       - now -t ${NOW_CLI_TOKEN} -e REACT_APP_ENV=${ENVIRONMENT}
       - now -t ${NOW_CLI_TOKEN} alias slo
