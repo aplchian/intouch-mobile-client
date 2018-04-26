@@ -13,7 +13,7 @@ const Endtime = ({ event }) => {
 const Duration = ({ event }) => {
   const { hoursDiff = '0', minutesDiff = '0' } = event
   const minutesDiffText = minutesDiff === null ? '0' : minutesDiff
-  const endString = path(['time', 'endString'], event)
+
   return (
     <span className="f6 gray">
       ({hoursDiff > 0
