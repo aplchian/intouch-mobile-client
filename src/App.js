@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
-import 'react-dates/lib/css/_datepicker.css'
-import './App.css'
-import './styles.css'
-import moment from 'moment'
-import EventsListPage from './components/Events/List'
-import DaySheetView from './components/DaySheet/View'
+import React, { Component } from "react"
+import "react-dates/lib/css/_datepicker.css"
+import "./App.css"
+import "./styles.css"
+import moment from "moment"
+import EventsListPage from "./components/Events/List"
+import DaySheetView from "./components/DaySheet/View"
+import mixpanel from "mixpanel-browser"
 
-require('onsenui')
+require("onsenui")
 
 const {
   Page,
@@ -15,7 +16,7 @@ const {
   Navigator,
   BackButton,
   Tabbar
-} = require('react-onsenui')
+} = require("react-onsenui")
 
 class App extends Component {
   constructor(props) {
@@ -27,11 +28,16 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleFocusChange = this.handleFocusChange.bind(this)
     this.state = {
-      events: [{ name: '' }],
+      events: [{ name: "" }],
       startDate: moment(),
-      endDate: moment().add(3, 'months'),
+      endDate: moment().add(3, "months"),
       index: 0
     }
+  }
+
+  componentDidMount() {
+    mixpanel.init("7630447ad4135bce160ab1e025fcc32a")
+    mixpanel.track("app mounted")
   }
 
   pushPage(navigator, obj) {
@@ -54,7 +60,7 @@ class App extends Component {
             <Navigator
               renderPage={this.renderPage}
               initialRoute={{
-                title: 'inTouch',
+                title: "inTouch",
                 hasBackButton: false,
                 Component: DaySheetView
               }}
@@ -67,7 +73,7 @@ class App extends Component {
               <i className="material-icons">schedule</i>
               <span
                 className="db f6"
-                style={{ position: 'relative', bottom: 38, fontSize: 11 }}
+                style={{ position: "relative", bottom: 38, fontSize: 11 }}
               >
                 today
               </span>
@@ -81,7 +87,7 @@ class App extends Component {
             <Navigator
               renderPage={this.renderPage}
               initialRoute={{
-                title: 'inTouch',
+                title: "inTouch",
                 hasBackButton: false,
                 Component: EventsListPage
               }}
@@ -94,7 +100,7 @@ class App extends Component {
               <i className="material-icons">event_note</i>
               <span
                 className="db f6"
-                style={{ position: 'relative', bottom: 38, fontSize: 11 }}
+                style={{ position: "relative", bottom: 38, fontSize: 11 }}
               >
                 events
               </span>
@@ -106,20 +112,16 @@ class App extends Component {
   }
 
   renderToolbar(route, navigator) {
-    const backButton = route.hasBackButton
-      ? <BackButton onClick={this.handleClick.bind(this, navigator)}>
-          Back
-        </BackButton>
-      : null
+    const backButton = route.hasBackButton ? (
+      <BackButton onClick={this.handleClick.bind(this, navigator)}>
+        Back
+      </BackButton>
+    ) : null
 
     return (
       <Toolbar>
-        <div className="left">
-          {backButton}
-        </div>
-        <div className="center">
-          {route.title}
-        </div>
+        <div className="left">{backButton}</div>
+        <div className="center">{route.title}</div>
         {/*<div>
           <Icon
             icon="ion-navicon, material:md-menu"
